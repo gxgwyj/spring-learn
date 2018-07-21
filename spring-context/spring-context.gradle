@@ -31,4 +31,8 @@ dependencies {
 	testRuntime("javax.xml.bind:jaxb-api:2.3.0")
 	testRuntime("org.glassfish:javax.el:3.0.1-b08")
 	testRuntime("org.javamoney:moneta:1.2.1")
+	optional("com.fasterxml.jackson.core:jackson-databind:${jackson2Version}")
+	optional("com.fasterxml.jackson.dataformat:jackson-dataformat-xml:${jackson2Version}")
+	optional("com.fasterxml.jackson.dataformat:jackson-dataformat-smile:${jackson2Version}")
+	optional("com.fasterxml.jackson.dataformat:jackson-dataformat-cbor:${jackson2Version}")
 }

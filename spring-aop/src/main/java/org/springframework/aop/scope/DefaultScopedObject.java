@@ -47,22 +47,22 @@ public class DefaultScopedObject implements ScopedObject, Serializable {
 	 * @param beanFactory the {@link ConfigurableBeanFactory} that holds the scoped target object
 	 * @param targetBeanName the name of the target bean
 	 */
-	public DefaultScopedObject(ConfigurableBeanFactory beanFactory, String targetBeanName) {
+public DefaultScopedObject(ConfigurableBeanFactory beanFactory, String targetBeanName) {
 		Assert.notNull(beanFactory, "BeanFactory must not be null");
 		Assert.hasText(targetBeanName, "'targetBeanName' must not be empty");
 		this.beanFactory = beanFactory;
 		this.targetBeanName = targetBeanName;
-	}
+		}
 
 
-	@Override
-	public Object getTargetObject() {
+@Override
+public Object getTargetObject() {
 		return this.beanFactory.getBean(this.targetBeanName);
-	}
+		}
 
-	@Override
-	public void removeFromScope() {
+@Override
+public void removeFromScope() {
 		this.beanFactory.destroyScopedBean(this.targetBeanName);
-	}
+		}
 
-}
+		}
