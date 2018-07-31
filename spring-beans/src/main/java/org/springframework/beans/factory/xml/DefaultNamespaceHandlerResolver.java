@@ -21,6 +21,8 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.ConcurrentHashMap;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -173,6 +175,13 @@ public class DefaultNamespaceHandlerResolver implements NamespaceHandlerResolver
 					}
 				}
 			}
+		}
+
+		ObjectMapper objectMapper = new ObjectMapper();
+		try {
+			System.out.println(objectMapper.writeValueAsString(handlerMappings));
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
 		}
 		return handlerMappings;
 	}

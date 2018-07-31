@@ -82,6 +82,7 @@ public abstract class NamespaceHandlerSupport implements NamespaceHandler {
 	private BeanDefinitionParser findParserForElement(Element element, ParserContext parserContext) {
 		String localName = parserContext.getDelegate().getLocalName(element);
 		BeanDefinitionParser parser = this.parsers.get(localName);
+		System.out.println("解析类型："+parser.getClass().getName());
 		if (parser == null) {
 			parserContext.getReaderContext().fatal(
 					"Cannot locate BeanDefinitionParser for element [" + localName + "]", element);
