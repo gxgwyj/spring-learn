@@ -860,6 +860,7 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
 		if (existingDefinition != null || containsSingleton(beanName)) {
 			resetBeanDefinition(beanName);
 		}
+		System.out.println("beanDefinitionMap:"+beanDefinitionMap.toString());
 	}
 
 	@Override

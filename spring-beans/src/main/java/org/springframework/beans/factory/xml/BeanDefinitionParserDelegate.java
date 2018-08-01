@@ -529,7 +529,7 @@ public class BeanDefinitionParserDelegate {
 			parseReplacedMethodSubElements(ele, bd.getMethodOverrides());
 
 			parseConstructorArgElements(ele, bd);
-			parsePropertyElements(ele, bd);
+			parsePropertyElements(ele, bd);//解析property
 			parseQualifierElements(ele, bd);
 
 			bd.setResource(this.readerContext.getResource());
