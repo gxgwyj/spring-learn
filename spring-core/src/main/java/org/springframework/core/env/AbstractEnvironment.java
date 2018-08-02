@@ -566,6 +566,7 @@ public abstract class AbstractEnvironment implements ConfigurableEnvironment {
 
 	@Override
 	public String resolvePlaceholders(String text) {
+		System.out.println("text:"+text);
 		return this.propertyResolver.resolvePlaceholders(text);
 	}
 
