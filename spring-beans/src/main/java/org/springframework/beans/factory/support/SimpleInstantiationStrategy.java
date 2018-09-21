@@ -84,11 +84,11 @@ public class SimpleInstantiationStrategy implements InstantiationStrategy {
 					}
 				}
 			}
-			return BeanUtils.instantiateClass(constructorToUse);
+			return BeanUtils.instantiateClass(constructorToUse);//使用java反射生成bean
 		}
 		else {
 			// Must generate CGLIB subclass.
-			return instantiateWithMethodInjection(bd, beanName, owner);
+			return instantiateWithMethodInjection(bd, beanName, owner);//使用cglib 生成bean
 		}
 	}
 
