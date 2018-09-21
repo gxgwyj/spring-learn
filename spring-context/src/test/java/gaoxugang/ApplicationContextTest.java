@@ -15,7 +15,7 @@ public class ApplicationContextTest {
 //		String[] locations = {"gaoxugang/context-simple.xml"};
 		ClassPathXmlApplicationContext ctx =  new ClassPathXmlApplicationContext(locations);
 		Student bean = ctx.getBean(Student.class);
-		System.out.println(bean.getTeacher());
+		System.out.println(bean.toString());
 	}
 
 }
