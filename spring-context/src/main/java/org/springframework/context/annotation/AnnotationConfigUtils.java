@@ -161,14 +161,14 @@ public abstract class AnnotationConfigUtils {
 
 		Set<BeanDefinitionHolder> beanDefs = new LinkedHashSet<>(4);
 
-		//内部注解处理器
+		//配置类注解处理器
 		if (!registry.containsBeanDefinition(CONFIGURATION_ANNOTATION_PROCESSOR_BEAN_NAME)) {
 			RootBeanDefinition def = new RootBeanDefinition(ConfigurationClassPostProcessor.class);
 			def.setSource(source);
 			beanDefs.add(registerPostProcessor(registry, def, CONFIGURATION_ANNOTATION_PROCESSOR_BEAN_NAME));
 		}
 
-		//内部自动注入注解处理器
+		//Autowired 等注解处理器
 		if (!registry.containsBeanDefinition(AUTOWIRED_ANNOTATION_PROCESSOR_BEAN_NAME)) {
 			RootBeanDefinition def = new RootBeanDefinition(AutowiredAnnotationBeanPostProcessor.class);
 			def.setSource(source);
@@ -209,7 +209,7 @@ public abstract class AnnotationConfigUtils {
 		}
 		System.out.println("注解处理器自动注册的bean----");
 		for (BeanDefinitionHolder beanDefinitionHolder:beanDefs) {
-			System.out.println(beanDefinitionHolder.getBeanName());
+			System.out.println(beanDefinitionHolder.getBeanName() + ":" + beanDefinitionHolder.getBeanDefinition().getBeanClassName());
 		}
 		return beanDefs;
 	}

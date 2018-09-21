@@ -179,7 +179,7 @@ public class DefaultNamespaceHandlerResolver implements NamespaceHandlerResolver
 
 		ObjectMapper objectMapper = new ObjectMapper();
 		try {
-			System.out.println(objectMapper.writeValueAsString(handlerMappings));
+			System.out.println("handlerMappings:"+objectMapper.writeValueAsString(handlerMappings));
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
 		}

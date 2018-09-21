@@ -1372,8 +1372,6 @@ public class BeanDefinitionParserDelegate {
 		if (namespaceUri == null) {
 			return null;
 		}
-		NamespaceHandlerResolver namespaceHandlerResolver = readerContext.getNamespaceHandlerResolver();
-
 		System.out.println("namespaceUri:"+namespaceUri);
 		NamespaceHandler handler = this.readerContext.getNamespaceHandlerResolver().resolve(namespaceUri);
 

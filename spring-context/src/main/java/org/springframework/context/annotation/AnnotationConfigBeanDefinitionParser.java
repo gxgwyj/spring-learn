@@ -49,6 +49,7 @@ public class AnnotationConfigBeanDefinitionParser implements BeanDefinitionParse
 				AnnotationConfigUtils.registerAnnotationConfigProcessors(parserContext.getRegistry(), source);
 
 		// Register component for the surrounding <context:annotation-config> element.
+		System.out.println("element TagName:" + element.getTagName());
 		CompositeComponentDefinition compDefinition = new CompositeComponentDefinition(element.getTagName(), source);
 		parserContext.pushContainingComponent(compDefinition);
 

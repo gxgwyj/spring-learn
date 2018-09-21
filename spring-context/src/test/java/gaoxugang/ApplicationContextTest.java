@@ -11,8 +11,8 @@ public class ApplicationContextTest {
 
 	@Test
 	public  void testApplication() {
-//		String[] locations = {"gaoxugang/annotation-based.xml","gaoxugang/context-simple.xml"};
-		String[] locations = {"gaoxugang/context-simple.xml"};
+		String[] locations = {"gaoxugang/annotation-based.xml","gaoxugang/context-simple.xml"};
+//		String[] locations = {"gaoxugang/context-simple.xml"};
 		ClassPathXmlApplicationContext ctx =  new ClassPathXmlApplicationContext(locations);
 		Student bean = ctx.getBean(Student.class);
 		System.out.println(bean.getTeacher());

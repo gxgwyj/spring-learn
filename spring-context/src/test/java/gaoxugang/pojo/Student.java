@@ -11,6 +11,7 @@ public class Student implements Serializable{
 	private String name;
 	private String email;
 
+	@Autowired
 	private Teacher teacher;
 
 	public Student() {
