@@ -11,7 +11,7 @@ public class Student implements Serializable{
 	private String name;
 	private String email;
 
-//	@Autowired
+	@Autowired
 	private Teacher teacher;
 
 	public Student() {
@@ -32,14 +32,5 @@ public class Student implements Serializable{
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-
-	public Teacher getTeacher() {
-		return teacher;
-	}
-
-	public void setTeacher(Teacher teacher) {
-		this.teacher = teacher;
 	}
 }
