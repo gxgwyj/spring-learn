@@ -114,6 +114,7 @@ public abstract class BeanUtils {
 	 * @see Constructor#newInstance
 	 */
 	public static <T> T instantiateClass(Class<T> clazz) throws BeanInstantiationException {
+		System.out.println("spring反射方法调用:" + BeanUtils.class.getSimpleName());
 		Assert.notNull(clazz, "Class must not be null");
 		if (clazz.isInterface()) {
 			throw new BeanInstantiationException(clazz, "Specified class is an interface");

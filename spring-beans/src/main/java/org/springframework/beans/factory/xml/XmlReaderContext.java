@@ -123,7 +123,6 @@ public class XmlReaderContext extends ReaderContext {
 		return this.namespaceHandlerResolver;
 	}
 
-
 	// Convenience methods to delegate to
 
 	/**
