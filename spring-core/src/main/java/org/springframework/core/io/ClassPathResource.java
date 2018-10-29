@@ -171,8 +171,6 @@ public class ClassPathResource extends AbstractFileResolvingResource {
 			is = this.clazz.getResourceAsStream(this.path);
 		}
 		else if (this.classLoader != null) {
-			//获取配置文件的地方
-			System.out.println("此处获取到spring-xml文件资源 inputStream");
 			is = this.classLoader.getResourceAsStream(this.path);
 		}
 		else {

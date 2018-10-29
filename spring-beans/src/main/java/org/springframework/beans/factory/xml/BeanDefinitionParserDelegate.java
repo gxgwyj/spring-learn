@@ -414,9 +414,7 @@ public class BeanDefinitionParserDelegate {
 	@Nullable
 	public BeanDefinitionHolder parseBeanDefinitionElement(Element ele, @Nullable BeanDefinition containingBean) {
 		String id = ele.getAttribute(ID_ATTRIBUTE);
-		System.out.println("bean-id:"+id);
 		String nameAttr = ele.getAttribute(NAME_ATTRIBUTE);
-		System.out.println("bean-name:"+nameAttr);
 
 
 		List<String> aliases = new ArrayList<>();
@@ -519,7 +517,6 @@ public class BeanDefinitionParserDelegate {
 
 		try {
 			AbstractBeanDefinition bd = createBeanDefinition(className, parent);
-			System.out.println(bd.getClass()+":"+bd.toString());
 
 			parseBeanDefinitionAttributes(ele, beanName, containingBean, bd);
 			bd.setDescription(DomUtils.getChildElementValueByTagName(ele, DESCRIPTION_ELEMENT));
@@ -534,9 +531,6 @@ public class BeanDefinitionParserDelegate {
 
 			bd.setResource(this.readerContext.getResource());
 			bd.setSource(extractSource(ele));
-
-			System.out.println("bd:"+bd.toString());
-
 			return bd;
 		}
 		catch (ClassNotFoundException ex) {
