@@ -489,7 +489,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 			prepareRefresh();
 
 			// Tell the subclass to refresh the internal bean factory.
-			//加载了spring容器中bean的数据结构，该过程并没有实例化bean
+			// 加载了spring容器中bean的数据结构，该过程并没有实例化bean
 			ConfigurableListableBeanFactory beanFactory = obtainFreshBeanFactory();
 
 			// Prepare the bean factory for use in this context.
@@ -500,7 +500,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 				postProcessBeanFactory(beanFactory);
 
 				// Invoke factory processors registered as beans in the context.
-				//此处回调 BeanFactoryPostProcessor,容器会执行所有的BeanFactoryPostProcessor
+				// 此处回调 BeanFactoryPostProcessor,容器会执行所有的BeanFactoryPostProcessor
 				invokeBeanFactoryPostProcessors(beanFactory);
 
 				// Register bean processors that intercept bean creation.
