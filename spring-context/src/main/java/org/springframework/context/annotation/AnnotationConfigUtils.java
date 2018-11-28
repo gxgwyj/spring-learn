@@ -152,10 +152,10 @@ public abstract class AnnotationConfigUtils {
 		//注解配置工具
 		if (beanFactory != null) {
 			if (!(beanFactory.getDependencyComparator() instanceof AnnotationAwareOrderComparator)) {
-				beanFactory.setDependencyComparator(AnnotationAwareOrderComparator.INSTANCE);
+				beanFactory.setDependencyComparator(AnnotationAwareOrderComparator.INSTANCE);  // 依赖排序???
 			}
 			if (!(beanFactory.getAutowireCandidateResolver() instanceof ContextAnnotationAutowireCandidateResolver)) {
-				beanFactory.setAutowireCandidateResolver(new ContextAnnotationAutowireCandidateResolver());
+				beanFactory.setAutowireCandidateResolver(new ContextAnnotationAutowireCandidateResolver());  // ???
 			}
 		}
 
