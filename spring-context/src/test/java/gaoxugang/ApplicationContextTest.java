@@ -6,6 +6,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
  * Created by Administrator on 2017/9/18.
+ * 测试一下git是否好使
  */
 public class ApplicationContextTest {
 
