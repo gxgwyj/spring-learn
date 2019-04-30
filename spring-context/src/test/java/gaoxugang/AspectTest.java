@@ -15,8 +15,6 @@ public class AspectTest {
 		ctx.start();
 		UserService userService = ctx.getBean(UserService.class);
 		userService.getUser();
-		System.out.print("XXXX");
-
 	}
 
 }

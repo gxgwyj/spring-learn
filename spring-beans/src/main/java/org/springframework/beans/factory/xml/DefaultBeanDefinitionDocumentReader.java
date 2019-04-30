@@ -147,9 +147,11 @@ public class DefaultBeanDefinitionDocumentReader implements BeanDefinitionDocume
 			}
 		}
 
-		preProcessXml(root);//前置处理
+		//前置处理
+		preProcessXml(root);
 		parseBeanDefinitions(root, this.delegate);
-		postProcessXml(root);//后置处理
+		//后置处理
+		postProcessXml(root);
 
 		this.delegate = parent;
 	}
@@ -178,13 +180,15 @@ public class DefaultBeanDefinitionDocumentReader implements BeanDefinitionDocume
 						parseDefaultElement(ele, delegate);
 					}
 					else {
-						delegate.parseCustomElement(ele);// 解析注解类的标签
+						// 解析注解类的标签
+						delegate.parseCustomElement(ele);
 					}
 				}
 			}
 		}
 		else {
-			delegate.parseCustomElement(root);// 解析注解类的标签
+			// 解析注解类的标签
+			delegate.parseCustomElement(root);
 		}
 	}
 

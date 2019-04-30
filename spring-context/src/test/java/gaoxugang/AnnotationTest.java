@@ -1,6 +1,5 @@
 package gaoxugang;
 
-import gaoxugang.pojo.Student;
 import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
