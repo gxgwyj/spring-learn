@@ -134,6 +134,7 @@ public abstract class AbstractRefreshableApplicationContext extends AbstractAppl
 			loadBeanDefinitions(beanFactory);
 			System.out.println("=================容器注册bean结束，此时还未初始化bean====================");
 			synchronized (this.beanFactoryMonitor) {
+				// 赋值beanFactory
 				this.beanFactory = beanFactory;
 			}
 		}
