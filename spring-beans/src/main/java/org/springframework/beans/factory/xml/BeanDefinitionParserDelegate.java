@@ -438,7 +438,7 @@ public class BeanDefinitionParserDelegate {
 		}
 
 		AbstractBeanDefinition beanDefinition = parseBeanDefinitionElement(ele, beanName, containingBean);
-		System.out.println(beanDefinition.toString());
+		System.out.println("bean的定义：" + beanDefinition.toString());
 		if (beanDefinition != null) {
 			if (!StringUtils.hasText(beanName)) {
 				try {

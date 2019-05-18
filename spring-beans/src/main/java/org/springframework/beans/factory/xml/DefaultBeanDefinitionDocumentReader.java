@@ -77,6 +77,10 @@ public class DefaultBeanDefinitionDocumentReader implements BeanDefinitionDocume
 
 	protected final Log logger = LogFactory.getLog(getClass());
 
+
+	/**
+	 * xml 读取解析器的上下文
+	 */
 	@Nullable
 	private XmlReaderContext readerContext;
 
