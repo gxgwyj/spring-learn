@@ -41,6 +41,7 @@ public interface AutowireCandidateResolver {
 	 * @see org.springframework.beans.factory.config.BeanDefinition#isAutowireCandidate()
 	 */
 	default boolean isAutowireCandidate(BeanDefinitionHolder bdHolder, DependencyDescriptor descriptor) {
+		// bean 的  autowireCandidate 属性，是否参与自动注入的设置，true 为参与，false 为不参与
 		return bdHolder.getBeanDefinition().isAutowireCandidate();
 	}
 

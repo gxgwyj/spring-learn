@@ -85,6 +85,10 @@ import org.springframework.util.xml.DomUtils;
  */
 public class BeanDefinitionParserDelegate {
 
+	/**
+	 * 说明bean定义解析委托类
+	 */
+
 	public static final String BEANS_NAMESPACE_URI = "http://www.springframework.org/schema/beans";
 
 	public static final String MULTI_VALUE_ATTRIBUTE_DELIMITERS = ",; ";
@@ -518,7 +522,9 @@ public class BeanDefinitionParserDelegate {
 		try {
 			AbstractBeanDefinition bd = createBeanDefinition(className, parent);
 
+			// 解析属性
 			parseBeanDefinitionAttributes(ele, beanName, containingBean, bd);
+
 			bd.setDescription(DomUtils.getChildElementValueByTagName(ele, DESCRIPTION_ELEMENT));
 
 			parseMetaElements(ele, bd);
@@ -582,15 +588,18 @@ public class BeanDefinitionParserDelegate {
 		}
 		bd.setLazyInit(TRUE_VALUE.equals(lazyInit));
 
-		//自动注入标识
+		//自动注入标识(比较重要的属性)
 		String autowire = ele.getAttribute(AUTOWIRE_ATTRIBUTE);
+		// 设置自动注入的模式(类别，名称，构造方法，自动识别等)
 		bd.setAutowireMode(getAutowireMode(autowire));
 
+		// bean 的 depends-on 属性 depends-on用来指定Bean初始化及销毁时的顺序。
 		if (ele.hasAttribute(DEPENDS_ON_ATTRIBUTE)) {
 			String dependsOn = ele.getAttribute(DEPENDS_ON_ATTRIBUTE);
 			bd.setDependsOn(StringUtils.tokenizeToStringArray(dependsOn, MULTI_VALUE_ATTRIBUTE_DELIMITERS));
 		}
 
+		// bean 的 autowire-candidate 属性  autowire-candidate="false"  表示该bean 不参与自动注入
 		String autowireCandidate = ele.getAttribute(AUTOWIRE_CANDIDATE_ATTRIBUTE);
 		if ("".equals(autowireCandidate) || DEFAULT_VALUE.equals(autowireCandidate)) {
 			String candidatePattern = this.defaults.getAutowireCandidates();
@@ -618,6 +627,7 @@ public class BeanDefinitionParserDelegate {
 			bd.setEnforceInitMethod(false);
 		}
 
+		// destroy-method 属性
 		if (ele.hasAttribute(DESTROY_METHOD_ATTRIBUTE)) {
 			String destroyMethodName = ele.getAttribute(DESTROY_METHOD_ATTRIBUTE);
 			bd.setDestroyMethodName(destroyMethodName);
@@ -627,6 +637,7 @@ public class BeanDefinitionParserDelegate {
 			bd.setEnforceDestroyMethod(false);
 		}
 
+		// factory-method bean 属性（工厂模式）
 		if (ele.hasAttribute(FACTORY_METHOD_ATTRIBUTE)) {
 			bd.setFactoryMethodName(ele.getAttribute(FACTORY_METHOD_ATTRIBUTE));
 		}
