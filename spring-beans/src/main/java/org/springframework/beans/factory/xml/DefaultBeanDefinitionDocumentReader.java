@@ -151,10 +151,11 @@ public class DefaultBeanDefinitionDocumentReader implements BeanDefinitionDocume
 			}
 		}
 
-		//前置处理
+		//前置处理（暂无处理）
 		preProcessXml(root);
+		//真正解析bean的方法
 		parseBeanDefinitions(root, this.delegate);
-		//后置处理
+		//后置处理（暂无处理）
 		postProcessXml(root);
 
 		this.delegate = parent;
@@ -174,6 +175,7 @@ public class DefaultBeanDefinitionDocumentReader implements BeanDefinitionDocume
 	 * @param root the DOM root element of the document
 	 */
 	protected void parseBeanDefinitions(Element root, BeanDefinitionParserDelegate delegate) {
+		// http://www.springframework.org/schema/beans
 		if (delegate.isDefaultNamespace(root)) {
 			NodeList nl = root.getChildNodes();
 			for (int i = 0; i < nl.getLength(); i++) {
@@ -197,15 +199,21 @@ public class DefaultBeanDefinitionDocumentReader implements BeanDefinitionDocume
 	}
 
 	private void parseDefaultElement(Element ele, BeanDefinitionParserDelegate delegate) {
+		// 解析 import
 		if (delegate.nodeNameEquals(ele, IMPORT_ELEMENT)) {
 			importBeanDefinitionResource(ele);
 		}
+		// 解析 alias
 		else if (delegate.nodeNameEquals(ele, ALIAS_ELEMENT)) {
 			processAliasRegistration(ele);
 		}
+
+		// 解析 bean（重要）
 		else if (delegate.nodeNameEquals(ele, BEAN_ELEMENT)) {
 			processBeanDefinition(ele, delegate);
 		}
+
+		// 解析 beans
 		else if (delegate.nodeNameEquals(ele, NESTED_BEANS_ELEMENT)) {
 			// recurse
 			doRegisterBeanDefinitions(ele);

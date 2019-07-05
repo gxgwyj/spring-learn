@@ -487,6 +487,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 		// 使用同步块对象锁
 		synchronized (this.startupShutdownMonitor) {
 			// Prepare this context for refreshing.
+			// 非主要操作
 			prepareRefresh();
 
 			// Tell the subclass to refresh the internal bean factory.
@@ -593,6 +594,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 	 * @see #getBeanFactory()
 	 */
 	protected ConfigurableListableBeanFactory obtainFreshBeanFactory() {
+		// 创建beanFacory
 		refreshBeanFactory();
 		ConfigurableListableBeanFactory beanFactory = getBeanFactory();
 		if (logger.isDebugEnabled()) {

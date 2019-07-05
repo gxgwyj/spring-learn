@@ -118,6 +118,10 @@ import org.springframework.util.StringUtils;
  * @see DefaultListableBeanFactory
  * @see BeanDefinitionRegistry
  */
+
+/**
+ * 有自动装配能力的beanFactory
+ */
 public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFactory
 		implements AutowireCapableBeanFactory {
 

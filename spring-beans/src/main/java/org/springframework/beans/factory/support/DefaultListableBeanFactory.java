@@ -149,6 +149,7 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
 	private Comparator<Object> dependencyComparator;
 
 	/** Resolver to use for checking if a bean definition is an autowire candidate. */
+	/** 解析器，用于检查bean定义是否是自动装配候选项. */
 	private AutowireCandidateResolver autowireCandidateResolver = new SimpleAutowireCandidateResolver();
 
 	/** Map from dependency type to corresponding autowired value. */

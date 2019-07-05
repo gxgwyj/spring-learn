@@ -28,6 +28,10 @@ import org.springframework.lang.Nullable;
  * @author Mark Fisher
  * @since 2.5
  */
+
+/**
+ * 策略接口
+ */
 public interface AutowireCandidateResolver {
 
 	/**

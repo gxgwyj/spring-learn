@@ -35,14 +35,28 @@ import org.springframework.util.ObjectUtils;
  * @see UnsatisfiedDependencyException#getInjectionPoint()
  * @see org.springframework.beans.factory.config.DependencyDescriptor
  */
+
+/**
+ * 注入点，bean在什么地方被注入的描述
+ */
+
 public class InjectionPoint {
 
+	/**
+	 * 方法参数
+	 */
 	@Nullable
 	protected MethodParameter methodParameter;
 
+	/**
+	 * 字段属性
+	 */
 	@Nullable
 	protected Field field;
 
+	/**
+	 * 注解数组
+	 */
 	@Nullable
 	private volatile Annotation[] fieldAnnotations;
 
@@ -115,6 +129,7 @@ public class InjectionPoint {
 	}
 
 	/**
+	 * 获取与已包装字段或方法/构造函数参数关联的注释。
 	 * Obtain the annotations associated with the wrapped field or method/constructor parameter.
 	 */
 	public Annotation[] getAnnotations() {
