@@ -11,6 +11,10 @@ public class Student implements Serializable{
 	private String name;
 	private String email;
 
+	public void study() {
+		System.out.println("学习课本");
+	}
+
 	@Autowired
 	private Teacher teacher;
 

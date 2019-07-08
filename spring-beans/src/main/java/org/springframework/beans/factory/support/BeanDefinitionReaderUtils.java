@@ -132,6 +132,7 @@ public abstract class BeanDefinitionReaderUtils {
 				id = generatedBeanName + GENERATED_BEAN_NAME_SEPARATOR + counter;
 			}
 		}
+		System.out.println("当没有指定bean【id】或者【name】时的，spring自己生成的beanName：" + id);
 		return id;
 	}
 

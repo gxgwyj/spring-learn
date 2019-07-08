@@ -4,10 +4,16 @@
 	   xmlns:context="http://www.springframework.org/schema/context"
 	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
 				http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
-	<bean id="tony" class="gaoxugang.pojo.Student">
+	<bean  class="gaoxugang.pojo.Student">
 	</bean>
-	<bean id="tom" class="gaoxugang.pojo.Teacher" >
+	<bean  class="gaoxugang.pojo.Teacher" >
 	</bean>
+
+	<bean name= "userPo" class="gaoxugang.pojo.User">
+	</bean>
+
+	<alias name="userPo" alias="springUserPo1"></alias>
+	<alias name="userPo" alias="springUserPo2"></alias>
 
 	<context:property-placeholder location="classpath:gaoxugang/conf/test.proerties"></context:property-placeholder>
 
