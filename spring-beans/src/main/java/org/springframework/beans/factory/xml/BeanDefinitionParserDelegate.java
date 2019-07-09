@@ -533,7 +533,8 @@ public class BeanDefinitionParserDelegate {
 			parseReplacedMethodSubElements(ele, bd.getMethodOverrides());
 
 			parseConstructorArgElements(ele, bd);
-			parsePropertyElements(ele, bd);//解析property
+			// 解析property
+			parsePropertyElements(ele, bd);
 			parseQualifierElements(ele, bd);
 
 			bd.setResource(this.readerContext.getResource());
@@ -638,10 +639,11 @@ public class BeanDefinitionParserDelegate {
 			bd.setEnforceDestroyMethod(false);
 		}
 
-		// factory-method bean 属性（工厂模式）
+		// factory-method bean 属性（静态工厂模式）
 		if (ele.hasAttribute(FACTORY_METHOD_ATTRIBUTE)) {
 			bd.setFactoryMethodName(ele.getAttribute(FACTORY_METHOD_ATTRIBUTE));
 		}
+		// 工厂模式
 		if (ele.hasAttribute(FACTORY_BEAN_ATTRIBUTE)) {
 			bd.setFactoryBeanName(ele.getAttribute(FACTORY_BEAN_ATTRIBUTE));
 		}
@@ -1375,10 +1377,13 @@ public class BeanDefinitionParserDelegate {
 	@Nullable
 	public BeanDefinition parseCustomElement(Element ele, @Nullable BeanDefinition containingBd) {
 		String namespaceUri = getNamespaceURI(ele);
+		System.out.println("标签的命名空间namespaceUri:" + namespaceUri);
 		if (namespaceUri == null) {
 			return null;
 		}
-		System.out.println("namespaceUri:" + namespaceUri);
+		// DefaultNamespaceHandlerResolver
+		// 根据命名空间获取对应的解析处理
+		// 如：http://www.springframework.org/schema/context命名空间对应的处理类是ContextNamespaceHandler
 		NamespaceHandler handler = this.readerContext.getNamespaceHandlerResolver().resolve(namespaceUri);
 
 		System.out.println("handler的实际类型：" + handler.getClass().getName());

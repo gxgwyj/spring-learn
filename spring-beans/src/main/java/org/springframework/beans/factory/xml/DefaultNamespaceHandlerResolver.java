@@ -153,10 +153,13 @@ public class DefaultNamespaceHandlerResolver implements NamespaceHandlerResolver
 	 * Load the specified NamespaceHandler mappings lazily.
 	 */
 	private Map<String, Object> getHandlerMappings() {
-		// 单例模式
+		// 单例模式(doubleCheck,双重锁检查)
 		Map<String, Object> handlerMappings = this.handlerMappings;
+		// 如果需要的实力为空，进行初始化
 		if (handlerMappings == null) {
+			// 加同步锁（多线程环境）
 			synchronized (this) {
+				// 重新赋值（多线程环境，并且handlerMappings 使用volatile关键字修饰，保证取到最新的handlerMappings）
 				handlerMappings = this.handlerMappings;
 				if (handlerMappings == null) {
 					try {
@@ -177,13 +180,12 @@ public class DefaultNamespaceHandlerResolver implements NamespaceHandlerResolver
 				}
 			}
 		}
-
-		ObjectMapper objectMapper = new ObjectMapper();
-		try {
-			System.out.println("handlerMappings:"+objectMapper.writeValueAsString(handlerMappings));
-		} catch (JsonProcessingException e) {
-			e.printStackTrace();
+		for(Map.Entry<String, Object> entry : handlerMappings.entrySet()){
+			String mapKey = entry.getKey();
+			Object mapValue = entry.getValue();
+			System.out.println(mapKey + "  【" + mapValue+"】");
 		}
+
 		return handlerMappings;
 	}
 
