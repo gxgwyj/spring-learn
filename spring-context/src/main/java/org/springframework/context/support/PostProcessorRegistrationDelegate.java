@@ -48,7 +48,6 @@ import org.springframework.lang.Nullable;
  */
 final class PostProcessorRegistrationDelegate {
 
-	// 单例模式
 	private PostProcessorRegistrationDelegate() {
 	}
 
@@ -83,7 +82,6 @@ final class PostProcessorRegistrationDelegate {
 			List<BeanDefinitionRegistryPostProcessor> currentRegistryProcessors = new ArrayList<>();
 
 			// First, invoke the BeanDefinitionRegistryPostProcessors that implement PriorityOrdered.
-			// 第一步，调用实现了PriorityOrdered 接口的实现类
 			String[] postProcessorNames =
 					beanFactory.getBeanNamesForType(BeanDefinitionRegistryPostProcessor.class, true, false);
 			for (String ppName : postProcessorNames) {
