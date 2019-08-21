@@ -10,7 +10,7 @@ import org.springframework.core.io.ClassPathResource;
  */
 public class ClassPathResourceTest {
 	@Test
-	public  void test(String[] args) {
+	public  void test() {
 		ClassPathResource res = new ClassPathResource("gaoxugang/context-simple.xml");
 		DefaultListableBeanFactory factory = new DefaultListableBeanFactory();
 		XmlBeanDefinitionReader reader = new XmlBeanDefinitionReader(factory);

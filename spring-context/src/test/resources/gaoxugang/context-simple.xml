@@ -7,7 +7,7 @@
 	<alias name="userPo" alias="springUserPo1"></alias>
 	<alias name="userPo" alias="springUserPo2"></alias>
 	<!--通过最常见的方式构造bean-->
-	<bean  class="gaoxugang.pojo.Student">
+	<bean  class="gaoxugang.pojo.Student" >
 	</bean>
 	<bean  class="gaoxugang.pojo.Teacher" >
 	</bean>

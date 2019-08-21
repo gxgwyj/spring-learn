@@ -31,6 +31,7 @@ import org.springframework.lang.Nullable;
 
 /**
  * 策略接口
+ * 用来判定bean定义中是否有自动装配的属性  autowire-candidate 属性的设置判断一个bean是否参与自动注入
  */
 public interface AutowireCandidateResolver {
 
