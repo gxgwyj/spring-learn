@@ -161,7 +161,7 @@ public abstract class AnnotationConfigUtils {
 
 		Set<BeanDefinitionHolder> beanDefs = new LinkedHashSet<>(4);
 
-		// @Configuration 注解处理器
+		// @Configuration 注解处理器  （BeanFactoryPostProcessor）
 		// ConfigurationClassPostProcessor
 		if (!registry.containsBeanDefinition(CONFIGURATION_ANNOTATION_PROCESSOR_BEAN_NAME)) {
 			RootBeanDefinition def = new RootBeanDefinition(ConfigurationClassPostProcessor.class);
@@ -170,7 +170,7 @@ public abstract class AnnotationConfigUtils {
 			beanDefs.add(registerPostProcessor(registry, def, CONFIGURATION_ANNOTATION_PROCESSOR_BEAN_NAME));
 		}
 
-		// @Autowired 注解处理器
+		// @Autowired 注解处理器（BeanPostProcessor）
 		// AutowiredAnnotationBeanPostProcessor
 		if (!registry.containsBeanDefinition(AUTOWIRED_ANNOTATION_PROCESSOR_BEAN_NAME)) {
 			RootBeanDefinition def = new RootBeanDefinition(AutowiredAnnotationBeanPostProcessor.class);
@@ -179,7 +179,7 @@ public abstract class AnnotationConfigUtils {
 		}
 
 		// Check for JSR-250 support, and if present add the CommonAnnotationBeanPostProcessor.
-		// CommonAnnotationBeanPostProcessor
+		// CommonAnnotationBeanPostProcessor （BeanPostProcessor）
 		if (jsr250Present && !registry.containsBeanDefinition(COMMON_ANNOTATION_PROCESSOR_BEAN_NAME)) {
 			RootBeanDefinition def = new RootBeanDefinition(CommonAnnotationBeanPostProcessor.class);
 			def.setSource(source);
@@ -187,7 +187,7 @@ public abstract class AnnotationConfigUtils {
 		}
 
 		// Check for JPA support, and if present add the PersistenceAnnotationBeanPostProcessor.
-		//
+		// BeanPostProcessor
 		if (jpaPresent && !registry.containsBeanDefinition(PERSISTENCE_ANNOTATION_PROCESSOR_BEAN_NAME)) {
 			RootBeanDefinition def = new RootBeanDefinition();
 			try {

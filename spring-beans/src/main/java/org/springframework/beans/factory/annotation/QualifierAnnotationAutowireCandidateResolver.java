@@ -57,6 +57,10 @@ import org.springframework.util.StringUtils;
  * @see Qualifier
  * @see Value
  */
+
+/**
+ * Qualifier 注解 自动注入解析器，起到自动装配是过滤的作用
+ */
 public class QualifierAnnotationAutowireCandidateResolver extends GenericTypeAwareAutowireCandidateResolver {
 
 	private final Set<Class<? extends Annotation>> qualifierTypes = new LinkedHashSet<>(2);
@@ -71,8 +75,10 @@ public class QualifierAnnotationAutowireCandidateResolver extends GenericTypeAwa
 	 */
 	@SuppressWarnings("unchecked")
 	public QualifierAnnotationAutowireCandidateResolver() {
+		// 添加spring Qualifier注解
 		this.qualifierTypes.add(Qualifier.class);
 		try {
+			// 添加Java 原生的 Qualifier 注解
 			this.qualifierTypes.add((Class<? extends Annotation>) ClassUtils.forName("javax.inject.Qualifier",
 							QualifierAnnotationAutowireCandidateResolver.class.getClassLoader()));
 		}
@@ -144,8 +150,10 @@ public class QualifierAnnotationAutowireCandidateResolver extends GenericTypeAwa
 	 */
 	@Override
 	public boolean isAutowireCandidate(BeanDefinitionHolder bdHolder, DependencyDescriptor descriptor) {
+		// 先调用父类的判断，如果符合要求再走子类中的判断
 		boolean match = super.isAutowireCandidate(bdHolder, descriptor);
 		if (match) {
+			// 判断字段的注解
 			match = checkQualifiers(bdHolder, descriptor.getAnnotations());
 			if (match) {
 				MethodParameter methodParam = descriptor.getMethodParameter();
@@ -168,6 +176,7 @@ public class QualifierAnnotationAutowireCandidateResolver extends GenericTypeAwa
 			return true;
 		}
 		SimpleTypeConverter typeConverter = new SimpleTypeConverter();
+		// 循环判断每个注解
 		for (Annotation annotation : annotationsToSearch) {
 			Class<? extends Annotation> type = annotation.annotationType();
 			boolean checkMeta = true;
@@ -220,7 +229,9 @@ public class QualifierAnnotationAutowireCandidateResolver extends GenericTypeAwa
 	protected boolean checkQualifier(
 			BeanDefinitionHolder bdHolder, Annotation annotation, TypeConverter typeConverter) {
 
+		// 注解
 		Class<? extends Annotation> type = annotation.annotationType();
+		// bean定义
 		RootBeanDefinition bd = (RootBeanDefinition) bdHolder.getBeanDefinition();
 
 		AutowireCandidateQualifier qualifier = bd.getQualifier(type.getName());
