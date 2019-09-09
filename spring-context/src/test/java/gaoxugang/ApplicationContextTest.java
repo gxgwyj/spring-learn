@@ -1,5 +1,6 @@
 package gaoxugang;
 
+import gaoxugang.pojo.MyApplicationContextAware;
 import gaoxugang.pojo.Student;
 import gaoxugang.pojo.User;
 import org.junit.Test;
@@ -56,7 +57,15 @@ public class ApplicationContextTest {
 		User springUserPo2 = registry.getBean("springUserPo2", User.class);
 		System.out.println(springUserPo1 == springUserPo2);
 
+	}
 
+
+	@Test
+	public void testApplicationAware() {
+		String[] locations = {"gaoxugang/context-aware.xml"};
+		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext(locations);
+		MyApplicationContextAware bean = ctx.getBean(MyApplicationContextAware.class);
+		bean.printTxt();
 	}
 
 }
