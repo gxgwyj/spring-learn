@@ -1,6 +1,10 @@
 buildscript {
 	repositories {
+		mavenLocal()
+		maven { url "https://maven.aliyun.com/repository/public" }
+		maven { url "https://repo1.maven.org/maven2" }
 		maven { url "https://repo.spring.io/plugins-release" }
+		mavenCentral()
 	}
 	dependencies {
 		classpath("io.spring.gradle:propdeps-plugin:0.0.9.RELEASE")
@@ -12,7 +16,8 @@ buildscript {
 plugins {
 	id "io.spring.dependency-management" version "1.0.5.RELEASE" apply false
 	id "org.jetbrains.kotlin.jvm" version "1.1.50" apply false
-	id "org.jetbrains.dokka" version "0.9.15"
+//	id "org.jetbrains.dokka" version "0.9.15"
+	id "org.jetbrains.dokka" version "0.9.17"
 	id "org.asciidoctor.convert" version "1.5.7"
 }
 
@@ -151,6 +156,10 @@ configure(allprojects) { project ->
 	repositories {
 		maven { url "https://repo.spring.io/libs-release" }
 		maven { url "https://repo.spring.io/snapshot" }  // for Reactor
+
+		maven { url "https://maven.aliyun.com/repository/public" }
+		maven { url "https://repo1.maven.org/maven2" }
+
 	}
 
 	dependencies {
