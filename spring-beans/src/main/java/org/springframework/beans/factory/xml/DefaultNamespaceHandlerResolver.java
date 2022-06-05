@@ -155,7 +155,7 @@ public class DefaultNamespaceHandlerResolver implements NamespaceHandlerResolver
 	private Map<String, Object> getHandlerMappings() {
 		// 单例模式(doubleCheck,双重锁检查)
 		Map<String, Object> handlerMappings = this.handlerMappings;
-		// 如果需要的实力为空，进行初始化
+		// 如果需要的实例为空，进行初始化
 		if (handlerMappings == null) {
 			// 加同步锁（多线程环境）
 			synchronized (this) {

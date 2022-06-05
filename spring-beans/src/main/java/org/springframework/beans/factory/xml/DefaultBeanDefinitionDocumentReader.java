@@ -183,6 +183,7 @@ public class DefaultBeanDefinitionDocumentReader implements BeanDefinitionDocume
 				if (node instanceof Element) {
 					Element ele = (Element) node;
 					if (delegate.isDefaultNamespace(ele)) {
+						// http://www.springframework.org/schema/beans
 						parseDefaultElement(ele, delegate);
 					}
 					else {
