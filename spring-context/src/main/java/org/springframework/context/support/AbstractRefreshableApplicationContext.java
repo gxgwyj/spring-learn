@@ -129,8 +129,10 @@ public abstract class AbstractRefreshableApplicationContext extends AbstractAppl
 		try {
 			DefaultListableBeanFactory beanFactory = createBeanFactory();
 			beanFactory.setSerializationId(getId());
+			// 自定义beanFactory
 			customizeBeanFactory(beanFactory);
 			// 加载bean定义,不同类型的容器有不同的实现（Xml加载，注解加载等等）
+			// 抽象方法，需要子类实现
 			loadBeanDefinitions(beanFactory);
 			System.out.println("=================容器注册bean结束，此时还未初始化bean====================");
 			synchronized (this.beanFactoryMonitor) {
