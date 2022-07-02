@@ -54,6 +54,7 @@ final class PostProcessorRegistrationDelegate {
 
 	/**
 	 * 在Java中，同一个类实现不同的接口，不同的方法可以有不同的接口类型，然后将该类型的对象可以传递到多个不同的函数中（接口编程）
+	 * 一个对象拥有了多种能力，如果一个人，即会教书，也会当厨师，还可以当司机。。。
 	 * @param beanFactory
 	 * @param beanFactoryPostProcessors
 	 */
@@ -65,18 +66,26 @@ final class PostProcessorRegistrationDelegate {
 
 		// bean定义注册接口（工厂）
 		if (beanFactory instanceof BeanDefinitionRegistry) {
+
 			BeanDefinitionRegistry registry = (BeanDefinitionRegistry) beanFactory;
+
+			// 常规类BeanFactory后置处理器
 			List<BeanFactoryPostProcessor> regularPostProcessors = new ArrayList<>();
+
+			// 注册中心类BeanFactory后置处理器
 			List<BeanDefinitionRegistryPostProcessor> registryProcessors = new ArrayList<>();
 
 			for (BeanFactoryPostProcessor postProcessor : beanFactoryPostProcessors) {
+				// 注册中心类BeanFactory后置处理器
 				if (postProcessor instanceof BeanDefinitionRegistryPostProcessor) {
 					BeanDefinitionRegistryPostProcessor registryProcessor =
 							(BeanDefinitionRegistryPostProcessor) postProcessor;
+					// 提前执行？
 					registryProcessor.postProcessBeanDefinitionRegistry(registry);
 					registryProcessors.add(registryProcessor);
 				}
 				else {
+					// 常规的BeanFactory后置处理器
 					regularPostProcessors.add(postProcessor);
 				}
 			}
@@ -85,12 +94,19 @@ final class PostProcessorRegistrationDelegate {
 			// uninitialized to let the bean factory post-processors apply to them!
 			// Separate between BeanDefinitionRegistryPostProcessors that implement
 			// PriorityOrdered, Ordered, and the rest.
+			/**
+			 * 在这里不初始化factorybean:我们需要保持所有常规bean不初始化，以便让bean工厂的后处理器应用于它们
+			 * 将实现优先级有序的BeanDefinitionRegistryPostProcessors、Ordered和其他功能分开。
+			 */
+
 			List<BeanDefinitionRegistryPostProcessor> currentRegistryProcessors = new ArrayList<>();
 
 			// First, invoke the BeanDefinitionRegistryPostProcessors that implement PriorityOrdered.
+			// 首先，调用实现PriorityOrdered的BeanDefinitionRegistryPostProcessors
 			String[] postProcessorNames =
 					beanFactory.getBeanNamesForType(BeanDefinitionRegistryPostProcessor.class, true, false);
 			for (String ppName : postProcessorNames) {
+				// 判断名称为 ppName 的Bean是否是 PriorityOrdered类型
 				if (beanFactory.isTypeMatch(ppName, PriorityOrdered.class)) {
 					// 触发了BeanFactoryBean的实例化（getBean方法）
 					currentRegistryProcessors.add(beanFactory.getBean(ppName, BeanDefinitionRegistryPostProcessor.class)); // 此处有触发创建bean的动作
