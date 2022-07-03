@@ -62,9 +62,10 @@ final class PostProcessorRegistrationDelegate {
 			ConfigurableListableBeanFactory beanFactory, List<BeanFactoryPostProcessor> beanFactoryPostProcessors) {
 
 		// Invoke BeanDefinitionRegistryPostProcessors first, if any.
+		// 首先需要回调 BeanDefinitionRegistryPostProcessors
 		Set<String> processedBeans = new HashSet<>();
 
-		// bean定义注册接口（工厂）
+		// bean定义注册接口（工厂）beanFactory 的类型为DefaultListableBeanFactory，继承了BeanDefinitionRegistry
 		if (beanFactory instanceof BeanDefinitionRegistry) {
 
 			BeanDefinitionRegistry registry = (BeanDefinitionRegistry) beanFactory;
@@ -97,6 +98,7 @@ final class PostProcessorRegistrationDelegate {
 			/**
 			 * 在这里不初始化factorybean:我们需要保持所有常规bean不初始化，以便让bean工厂的后处理器应用于它们
 			 * 将实现优先级有序的BeanDefinitionRegistryPostProcessors、Ordered和其他功能分开。
+			 * 实现了 PriorityOrdered的要比实现了 Ordered 的优先级高，所以先执行PriorityOrdered的
 			 */
 
 			List<BeanDefinitionRegistryPostProcessor> currentRegistryProcessors = new ArrayList<>();
@@ -113,12 +115,17 @@ final class PostProcessorRegistrationDelegate {
 					processedBeans.add(ppName);
 				}
 			}
+			// 排序处理
 			sortPostProcessors(currentRegistryProcessors, beanFactory);
+			// 全部加入到集合中
 			registryProcessors.addAll(currentRegistryProcessors);
+
+			// 调用所有的 currentRegistryProcessors
 			invokeBeanDefinitionRegistryPostProcessors(currentRegistryProcessors, registry);
 			currentRegistryProcessors.clear();
 
 			// Next, invoke the BeanDefinitionRegistryPostProcessors that implement Ordered.
+			// 调用实现了 Ordered接口的 BeanDefinitionRegistryPostProcessors
 			postProcessorNames = beanFactory.getBeanNamesForType(BeanDefinitionRegistryPostProcessor.class, true, false);
 			for (String ppName : postProcessorNames) {
 				if (!processedBeans.contains(ppName) && beanFactory.isTypeMatch(ppName, Ordered.class)) {
