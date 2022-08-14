@@ -86,7 +86,7 @@ import org.springframework.util.xml.DomUtils;
 public class BeanDefinitionParserDelegate {
 
 	/**
-	 * 说明bean定义解析委托类
+	 * bean定义解析委托类
 	 */
 
 	public static final String BEANS_NAMESPACE_URI = "http://www.springframework.org/schema/beans";

@@ -503,7 +503,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 
 				// Invoke factory processors registered as beans in the context.
 				// bean工厂的后置处理器，在实例化bean之前调用  BeanFactoryPostProcessor(如：PropertyPlaceholderConfigurer【bean属性替换流程】)
-				// 先实例化，后调用，post 英文释义：在之后
+				// 先实例化，后调用
 				invokeBeanFactoryPostProcessors(beanFactory);
 
 				// Register bean processors that intercept bean creation.
@@ -670,9 +670,11 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 	 * Instantiate and invoke all registered BeanFactoryPostProcessor beans,
 	 * respecting explicit order if given.
 	 * <p>Must be called before singleton instantiation.
+	 * 必须在单例实例化之前调用
 	 */
 	protected void invokeBeanFactoryPostProcessors(ConfigurableListableBeanFactory beanFactory) {
 		// 调用工厂后置处理器
+		// getBeanFactoryPostProcessors()一般是个空的
 		PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(beanFactory, getBeanFactoryPostProcessors());
 
 		// Detect a LoadTimeWeaver and prepare for weaving, if found in the meantime
