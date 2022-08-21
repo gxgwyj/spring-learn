@@ -173,6 +173,7 @@ public class DefaultBeanDefinitionDocumentReader implements BeanDefinitionDocume
 	 * Parse the elements at the root level in the document:
 	 * "import", "alias", "bean".
 	 * @param root the DOM root element of the document
+	 * 解析spring配置文件根级别的元素 import、alias、bean
 	 */
 	protected void parseBeanDefinitions(Element root, BeanDefinitionParserDelegate delegate) {
 		// http://www.springframework.org/schema/beans
@@ -187,20 +188,20 @@ public class DefaultBeanDefinitionDocumentReader implements BeanDefinitionDocume
 						parseDefaultElement(ele, delegate);
 					}
 					else {
-						// 解析注解类的标签
+						// 解析（自定义元素）非http://www.springframework.org/schema/beans命名空间下的xml元素，如http://www.springframework.org/schema/context
 						delegate.parseCustomElement(ele);
 					}
 				}
 			}
 		}
 		else {
-			// 解析注解类的标签
+			// 解析（自定义元素）非http://www.springframework.org/schema/beans命名空间下的xml元素，如http://www.springframework.org/schema/context
 			delegate.parseCustomElement(root);
 		}
 	}
 
 	private void parseDefaultElement(Element ele, BeanDefinitionParserDelegate delegate) {
-		// 解析 import
+		// 解析 import，最终又会调到 XmlBeanDefinitionReader.loadBeanDefinitions(org.springframework.core.io.Resource)
 		if (delegate.nodeNameEquals(ele, IMPORT_ELEMENT)) {
 			importBeanDefinitionResource(ele);
 		}
@@ -224,6 +225,10 @@ public class DefaultBeanDefinitionDocumentReader implements BeanDefinitionDocume
 	/**
 	 * Parse an "import" element and load the bean definitions
 	 * from the given resource into the bean factory.
+	 * 解析一个“import”元素，并将bean定义从给定的资源加载到bean工厂中。
+	 * <import resource="services.xml"/>
+	 * <import resource="resources/messageSource.xml"/>
+	 * <import resource="/resources/themeSource.xml"/>
 	 */
 	protected void importBeanDefinitionResource(Element ele) {
 		String location = ele.getAttribute(RESOURCE_ATTRIBUTE);
@@ -233,13 +238,16 @@ public class DefaultBeanDefinitionDocumentReader implements BeanDefinitionDocume
 		}
 
 		// Resolve system properties: e.g. "${user.dir}"
+		// 解析系统属性:" $ {user.dir} "
 		location = getReaderContext().getEnvironment().resolveRequiredPlaceholders(location);
 
+		// 实际的地址集合
 		Set<Resource> actualResources = new LinkedHashSet<>(4);
 
 		// Discover whether the location is an absolute or relative URI
 		boolean absoluteLocation = false;
 		try {
+			// classpath*: 和 classpath: 都是绝对位置
 			absoluteLocation = ResourcePatternUtils.isUrl(location) || ResourceUtils.toURI(location).isAbsolute();
 		}
 		catch (URISyntaxException ex) {
@@ -292,6 +300,10 @@ public class DefaultBeanDefinitionDocumentReader implements BeanDefinitionDocume
 
 	/**
 	 * Process the given alias element, registering the alias with the registry.
+	 * <alias name="userPo" alias="springUserPo1"></alias>
+	 * <alias name="userPo" alias="springUserPo2"></alias>
+	 * 最终注册的位置 private final Map<String, String> aliasMap = new ConcurrentHashMap<>(16);
+	 *
 	 */
 	protected void processAliasRegistration(Element ele) {
 		String name = ele.getAttribute(NAME_ATTRIBUTE);
@@ -337,6 +349,7 @@ public class DefaultBeanDefinitionDocumentReader implements BeanDefinitionDocume
 						bdHolder.getBeanName() + "'", ele, ex);
 			}
 			// Send registration event.
+			// 发送注册bean事件
 			getReaderContext().fireComponentRegistered(new BeanComponentDefinition(bdHolder));
 		}
 	}
