@@ -234,6 +234,9 @@ public class BeanDefinitionParserDelegate {
 
 	private final XmlReaderContext readerContext;
 
+	/**
+	 * 保存标准Spring XML bean定义文档中<beans>级别指定的默认值的简单JavaBean: default-lazy-init、default-autowire等。
+	 */
 	private final DocumentDefaultsDefinition defaults = new DocumentDefaultsDefinition();
 
 	private final ParseState parseState = new ParseState();
