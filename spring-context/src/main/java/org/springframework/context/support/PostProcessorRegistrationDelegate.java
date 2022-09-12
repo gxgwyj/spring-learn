@@ -115,7 +115,7 @@ final class PostProcessorRegistrationDelegate {
 					processedBeans.add(ppName);
 				}
 			}
-			// 排序处理
+			// 排序处理(根据优先级排序)
 			sortPostProcessors(currentRegistryProcessors, beanFactory);
 			// 全部加入到集合中
 			registryProcessors.addAll(currentRegistryProcessors);

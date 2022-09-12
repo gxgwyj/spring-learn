@@ -948,6 +948,7 @@ public class BeanDefinitionParserDelegate {
 			}
 		}
 
+        // <property name="password" value="${jdbc.password}" ref="abc"/> 属性中的ref
 		boolean hasRefAttribute = ele.hasAttribute(REF_ATTRIBUTE);
 		boolean hasValueAttribute = ele.hasAttribute(VALUE_ATTRIBUTE);
 		if ((hasRefAttribute && hasValueAttribute) ||
