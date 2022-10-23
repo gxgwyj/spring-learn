@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+	<!--BeanFactoryPostProcessor扩展-->
+	<bean class="gaoxugang.extension.AppBeanFactoryPostProcessor" />
+
+	<!--BeanPostProcessor扩展-->
+	<bean class="gaoxugang.extension.InstantiationTracingBeanPostProcessor" />
+
+	<bean name="student1" class="gaoxugang.pojo.Student"></bean>
+	<bean name="teacher1" class="gaoxugang.pojo.Teacher"></bean>
+
+
+
+
+</beans>
