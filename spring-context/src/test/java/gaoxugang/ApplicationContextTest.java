@@ -5,9 +5,8 @@ import gaoxugang.pojo.Student;
 import gaoxugang.pojo.User;
 import org.junit.Test;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
-import org.springframework.beans.factory.xml.DefaultDocumentLoader;
-import org.springframework.beans.factory.xml.DocumentLoader;
 import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.DefaultResourceLoader;
@@ -16,14 +15,12 @@ import org.springframework.core.io.ResourceLoader;
 
 /**
  * Created by Administrator on 2017/9/18.
- * 测试一下git是否好使
  */
 public class ApplicationContextTest {
 
 	@Test
 	public  void testApplication() {
-		String[] locations = {"gaoxugang/annotation-based.xml","gaoxugang/context-simple.xml"};
-		ClassPathXmlApplicationContext ctx =  new ClassPathXmlApplicationContext(locations);
+		ClassPathXmlApplicationContext ctx =  new ClassPathXmlApplicationContext("gaoxugang/context-simple.xml");
 		Student bean = ctx.getBean(Student.class);
 		System.out.println(bean.toString());
 	}
@@ -52,11 +49,6 @@ public class ApplicationContextTest {
 		student.study();
 		((Student) bean).study();
 
-		System.out.println("使用别名获取......");
-		User springUserPo1 = registry.getBean("springUserPo1", User.class);
-		User springUserPo2 = registry.getBean("springUserPo2", User.class);
-		System.out.println(springUserPo1 == springUserPo2);
-
 	}
 
 
@@ -66,6 +58,18 @@ public class ApplicationContextTest {
 		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext(locations);
 		MyApplicationContextAware bean = ctx.getBean(MyApplicationContextAware.class);
 		bean.printTxt();
+	}
+
+	/**
+	 * spring 别名单元测试
+	 */
+	@Test
+	public void testAlias() {
+		ApplicationContext ctx = new ClassPathXmlApplicationContext("gaoxugang/alias-config.xml");
+		System.out.println("使用别名获取......");
+		User springUserPo1 = ctx.getBean("springUserPo1", User.class);
+		User springUserPo2 = ctx.getBean("springUserPo2", User.class);
+		System.out.println(springUserPo1 == springUserPo2);
 	}
 
 }

@@ -1,25 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	   xmlns:context="http://www.springframework.org/schema/context"
 	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
-				http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
-	<alias name="userPo" alias="springUserPo1"></alias>
-	<alias name="userPo" alias="springUserPo2"></alias>
+">
 	<!--通过最常见的方式构造bean-->
 	<bean  class="gaoxugang.pojo.Student" >
 	</bean>
 	<bean  class="gaoxugang.pojo.Teacher" >
 	</bean>
-	<bean name= "userPo" class="gaoxugang.pojo.User">
-	</bean>
-
-	<bean name= "myApplicationContextAware" class="gaoxugang.pojo.MyApplicationContextAware">
-	</bean>
-
-	<!--通过静态工厂方法定义bean-->
-	<bean id="clientService" class="gaoxugang.pojo.ClientServiceExp" factory-method="createInstance"/>
-
-	<context:property-placeholder location="classpath:gaoxugang/conf/test.proerties"></context:property-placeholder>
 
 </beans>
