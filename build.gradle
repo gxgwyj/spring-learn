@@ -2,8 +2,12 @@ buildscript {
 	repositories {
 		mavenLocal()
 		maven { url "https://maven.aliyun.com/repository/public" }
+		maven { url "https://maven.aliyun.com/repository/spring" }
 		maven { url "https://repo1.maven.org/maven2" }
 		maven { url "https://repo.spring.io/plugins-release" }
+		maven { url "https://maven.aliyun.com/repository/spring-plugin" }
+		maven { url "https://repo.springsource.org/plugins-release" }
+
 		mavenCentral()
 	}
 	dependencies {
@@ -330,4 +334,8 @@ def qualifyVersionIfNecessary(version) {
 		}
 	}
 	return version
+}
+
+tasks.withType(JavaCompile) {
+	options.encoding = "UTF-8"
 }
